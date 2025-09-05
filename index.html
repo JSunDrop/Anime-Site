@@ -1,40 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OtakuHub — Grande Pro V3.3</title>
-  <link rel="icon" href="assets/placeholder.svg"/>
-  <link rel="stylesheet" href="style.css"/>
-</head>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OtakuHub — Single‑file V3.3</title>
+<style>:root{--bg:#070a12;--panel:#0c101b;--panel-2:#111728;--text:#eaf2ff;--muted:#a7b8d9;--accent:#66b3ff;--accent-2:#7cc6ff;--radius:18px;--shadow:0 12px 40px rgba(0,0,0,.5)}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
+#bg{position:fixed;inset:0;z-index:-2}
+.site-header{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:14px 20px;background:rgba(12,16,27,.75);backdrop-filter:blur(8px);border-bottom:1px solid #1e2740}
+.brand{font-weight:900;cursor:pointer}.brand .grand{color:var(--accent);text-shadow:0 0 24px rgba(124,198,255,.4)}
+.nav{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:12px}.nav a:hover{background:var(--panel-2);color:var(--text)}
+.nav-center{justify-content:center}.nav-right{display:flex;justify-content:flex-end}.cta{background:var(--accent);color:#04121e;font-weight:800;border-radius:12px;padding:10px 14px;box-shadow:0 10px 24px rgba(124,198,255,.25)}
+#app{padding:28px;max-width:1280px;margin:0 auto}
+.panel{background:linear-gradient(180deg,rgba(17,23,40,.92),rgba(12,16,27,.92));border:1px solid #203056;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center}
+.hero .title{font-size:48px;line-height:1.1;margin:0 0 6px 0}.hero .subtitle{color:var(--muted);margin:0 0 10px 0}
+.card{background:linear-gradient(180deg,rgba(17,23,40,.96),rgba(12,16,27,.96));border:1px solid #203056;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);transition:transform .18s}.card:hover{transform:translateY(-3px)}
+.card .thumb{width:100%;aspect-ratio:3/4;object-fit:cover;background:#0b1122}.card .content{padding:12px}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#0f172a;color:#a7b8d9;font-size:12px;border:1px solid #21365c}
+.button{background:var(--panel-2);color:var(--text);border:1px solid #203056;padding:12px 16px;border-radius:12px;cursor:pointer}
+.button.primary{background:var(--accent);color:#04121e;border:none;font-weight:800}
+.input,select,textarea{width:100%;background:#0b1224;color:var(--text);padding:12px;border-radius:12px;border:1px solid #1f2947}
+.hstack{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.vstack{display:flex;flex-direction:column;gap:12px}
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:18px}
+@media (max-width:900px){.hero{grid-template-columns:1fr}.two-col{grid-template-columns:1fr}}
+.sidebar{position:sticky;top:92px;align-self:start}.notice{padding:10px 12px;border-radius:10px;background:#0d162c;border:1px solid #243a65;color:#a9c5f5}
+.lock{background:rgba(255,107,138,.1);border:1px solid #ff6b8a;color:#ffd1dc;padding:8px;border-radius:10px}
+#toast{position:fixed;right:20px;bottom:20px;display:flex;flex-direction:column;gap:10px;z-index:50}.toast{background:#0c152b;border:1px solid #2a4270;border-radius:12px;padding:10px 12px}
+.site-footer{padding:18px;color:#a7b8d9}
+</style></head>
 <body>
-  <canvas id="bg"></canvas>
-
-  <header class="site-header">
-    <div class="brand" onclick="location.hash='#/home'">🎌 OtakuHub <span class="grand">GRANDE PRO</span></div>
-    <nav class="nav nav-center">
-      <a href="#/home">Home</a>
-      <a href="#/explore">Explore</a>
-      <a href="#/leaderboard">Leaderboard</a>
-      <a href="#/market">Shop</a>
-      <a href="#/studio">Studio</a>
-      <a href="#/discover">Search & Recs</a>
-      <a href="#/forum">Forum</a>
-      <a href="#/live">Live</a>
-    </nav>
-    <div class="nav-right"><a class="cta" href="#/publish">Publish</a></div>
-  </header>
-
-  <div id="toast"></div>
-  <main id="app"></main>
-
-  <footer class="site-footer">
-    <div class="footer-wrap">© <span id="year"></span> OtakuHub · <a href="#/policy">Policy</a></div>
-  </footer>
-
-  <script src="data.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="bg.js" defer></script>
-  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
-</body>
-</html>
+<canvas id="bg"></canvas>
+<header class="site-header">
+  <div class="brand" onclick="location.hash='#/home'">🎌 OtakuHub <span class="grand">GRANDE PRO</span></div>
+  <nav class="nav nav-center">
+    <a href="#/home">Home</a><a href="#/explore">Explore</a><a href="#/publish">Publish</a><a href="#/policy">Policy</a>
+  </nav>
+  <div class="nav-right"><a class="cta" href="#/publish">Publish</a></div>
+</header>
+<div id="toast"></div>
+<main id="app"></main>
+<footer class="site-footer">© <script>document.write(new Date().getFullYear())</script> OtakuHub</footer>
+<script>
+const STORAGE_KEY="oh_v33_single"; const now=()=>new Date().toISOString();
+const RATINGS=['E','T','M','X']; const RATING_LABEL={E:'Everyone',T:'Teen (13+)',M:'Mature (17+)',X:'Explicit (18+)'};
+const RATING_MIN_AGE={E:0,T:13,M:17,X:18};
+const initialState={ users:[{id:'u_demo',handle:'demo',displayName:'Demo User'}],
+  account:{userId:'u_demo',dob:null,handle:null,displayName:null},
+  studios:[{id:'s_oni',name:'OniWorks',slug:'oniworks',bio:'Indie anime studio.',ownerId:'u_demo',members:['u_demo']}],
+  works:[
+    {id:'w1',studioId:'s_oni',kind:'manga',title:'Blade of Dawn',slug:'blade-of-dawn',synopsis:'A young swordsman seeks the sun blade.',tags:['shounen','adventure','fantasy'],rating:'T',cover:'data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='560'><rect width='100%' height='100%' fill='#0a1224'/><circle cx='180' cy='140' r='90' fill='#7cc6ff' opacity='.35'/><circle cx='620' cy='420' r='130' fill='#66b3ff' opacity='.35'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#cfe6ff' font-family='Arial' font-size='22'>Artwork</text></svg>',createdAt:now(),parts:[{id:'p1',index:1,title:'Chapter 1: Ember',rating:'T',public:true,publishedAt:now(),pages:[{id:'pg1',pageNum:1,imageUrl:'data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='560'><rect width='100%' height='100%' fill='#0a1224'/><circle cx='180' cy='140' r='90' fill='#7cc6ff' opacity='.35'/><circle cx='620' cy='420' r='130' fill='#66b3ff' opacity='.35'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#cfe6ff' font-family='Arial' font-size='22'>Artwork</text></svg>'}],video:null,likes:25,views:402}]},
+    {id:'w2',studioId:'s_oni',kind:'animation',title:'Spark Runner',slug:'spark-runner',synopsis:'Courier races through neon cityscapes.',tags:['sci-fi','action','neon'],rating:'T',cover:'data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='560'><rect width='100%' height='100%' fill='#0a1224'/><circle cx='180' cy='140' r='90' fill='#7cc6ff' opacity='.35'/><circle cx='620' cy='420' r='130' fill='#66b3ff' opacity='.35'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#cfe6ff' font-family='Arial' font-size='22'>Artwork</text></svg>',createdAt:now(),parts:[{id:'p2',index:1,title:'Episode 1: Night Shift',rating:'T',public:true,publishedAt:now(),pages:[],video:{posterUrl:'data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='560'><rect width='100%' height='100%' fill='#0a1224'/><circle cx='180' cy='140' r='90' fill='#7cc6ff' opacity='.35'/><circle cx='620' cy='420' r='130' fill='#66b3ff' opacity='.35'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#cfe6ff' font-family='Arial' font-size='22'>Artwork</text></svg>'},likes:17,views:180}]}
+  ],
+  listings:[], likes:{}, favorites:[], progress:{}, comments:{}, forum:{categories:[],threads:[]}, live:{general:[]}, notifications:[]
+};
+function load(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||initialState}catch(e){return initialState} }
+let state=load(); function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
+const studioById=id=>state.studios.find(s=>s.id===id); const workBySlug=slug=>state.works.find(w=>w.slug===slug);
+const partsOfWork=w=>w.parts.filter(p=>p.public).sort((a,b)=>a.index-b.index);
+function userAge(){const d=state.account.dob;if(!d)return 0;const dob=new Date(d),t=new Date();let a=t.getFullYear()-dob.getFullYear();const m=t.getMonth()-dob.getMonth();if(m<0||(m===0&&t.getDate()<dob.getDate()))a--;return a}
+function meets(code){return userAge()>= (RATING_MIN_AGE[code||'E']||0)} function isLockedWork(w){return !meets(w.rating)} function isLockedPart(p){return !meets(p.rating)}
+function newId(p='id'){return p+'_'+Math.random().toString(36).slice(2,8)}
+function toggleLike(id){const liked=state.likes[id]=!state.likes[id]; save()}
+function markProgress(workId, partIndex, pageNum){state.progress[workId]={partIndex,pageNum:pageNum||1}; save()}
+</script>
+<script>
+const app=document.getElementById('app'); addEventListener('hashchange',render); addEventListener('load',render);
+function route(){const h=location.hash||"#/home";const [_,p,a,b]=h.split("/");return {p,a,b}}
+function ensureOnboarded(){ if(state.account?.dob && state.account?.handle) return true;
+  app.innerHTML=`<section class="panel vstack"><h2>Create Profile</h2><label>Handle <input id="h" class="input"/></label><label>Display name <input id="d" class="input"/></label><label>DOB <input id="dob" class="input" type="date"/></label><div class="hstack" style="justify-content:flex-end"><button class="button primary" id="s">Save</button></div></section>`;
+  document.getElementById('s').onclick=()=>{const h=document.getElementById('h').value.trim();const d=document.getElementById('d').value.trim();const dob=document.getElementById('dob').value;if(!h||!dob)return alert('Handle and DOB required');state.account.handle=h;state.account.displayName=d||h;state.account.dob=dob;save();location.hash='#/home'}; return false }
+function card(w){ const studio=studioById(w.studioId); const locked=! (userAge() >= ({E:0,T:13,M:17,X:18}[w.rating]||0));
+  return `<div class="card"><a href="${locked?'#//blocked':('#/work/'+w.slug)}" ${locked?'onclick="event.preventDefault();alert(\'Age restriction: '+w.rating+'\')"' : ''}><img class="thumb" src="${w.cover}"/></a><div class="content"><div class="hstack" style="justify-content:space-between"><a href="${locked?'#//blocked':('#/work/'+w.slug)}"><b>${w.title}</b></a><span class="badge">${w.kind}</span></div><div style="color:#a7b8d9;font-size:13px">by ${studio?.name||'Unknown'}</div><div>${(w.tags||[]).map(t=>`<span class='badge'>#${t}</span>`).join(' ')} <span class='badge'>Rated ${w.rating}</span></div></div></div>`;
+}
+function home(){ if(!ensureOnboarded()) return;
+  const featured=state.works; app.innerHTML=`<section class="hero"><div class="panel vstack"><h1 class="title">Create. Publish. Collaborate.</h1><p class="subtitle">Clean readers for manga & video with age protection and a fair <b>1% platform fee</b>.</p><div class="hstack"><a class="button primary" href="#/publish">Start Publishing</a><a class="button" href="#/explore">Explore Works</a></div></div><div class="panel vstack"><h3 style="margin:0">Featured</h3><div class="grid">${featured.map(card).join('')}</div></div></section>`;
+}
+function workView(slug){ if(!ensureOnboarded()) return; const w=workBySlug(slug); if(!w){app.innerHTML='<div class="panel">Not found</div>';return}
+  const parts=partsOfWork(w); const current=parts[0]; app.innerHTML=`<section class="two-col"><div class="vstack"><div class="panel vstack"><div class="hstack" style="gap:18px;justify-content:space-between"><div class="hstack" style="gap:18px"><img src="${w.cover}" style="width:140px;height:186px;border-radius:14px;object-fit:cover"/><div class="vstack" style="gap:6px"><h2 style="margin:0">${w.title} <span class="badge">${w.kind}</span> <span class="badge">Rated ${w.rating}</span></h2><p style="margin:0">${w.synopsis||''}</p><div>${(w.tags||[]).map(t=>`<span class='badge'>#${t}</span>`).join(' ')}</div><div class="hstack"><a class="button" href="#/work/${w.slug}">Start</a></div></div></div></div><div class="panel vstack" id="viewer"></div></div><aside class="sidebar vstack"><div class="panel vstack"><h3 style="margin:0">${w.kind==='manga'?'Chapters':'Episodes'}</h3>${parts.map(p=>`<a class='hstack' href='#/work/${w.slug}' style='justify-content:space-between;padding:8px;border-bottom:1px solid #223154'><div>${w.kind==='manga'?'Ch.':'Ep.'} ${p.index}: ${p.title||''}</div></a>`).join('')}</div></aside></section>`;
+  function renderViewer(part){ markProgress(w.id, part.index, 1); document.getElementById('viewer').innerHTML = w.kind==='manga' ? `<div class="vstack" style="gap:8px;margin-top:8px">${part.pages.map(pg=>`<img src="${pg.imageUrl}" class="thumb" style="max-width:900px;margin:0 auto;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.35)" />`).join('')}</div>` : `<div class="panel" style="background:#0a0f1e;margin-top:8px"><div style="aspect-ratio:16/9;background:#0c1020;border-radius:12px;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.35)"><div class="vstack" style="align-items:center"><div style="font-size:54px">▶</div><div style="color:#a7b8d9">Video placeholder</div></div></div></div>` }
+  renderViewer(current);
+}
+function explore(){ if(!ensureOnboarded()) return; app.innerHTML=`<section class="panel vstack"><h2 style="margin:0">Explore</h2><div class="grid">${state.works.map(card).join('')}</div></section>` }
+function publish(){ if(!ensureOnboarded()) return; app.innerHTML=`<section class="panel vstack"><h2 style="margin:0">Publish (prototype)</h2><p>Use the Next.js version for real uploads.</p></section>` }
+function policy(){ app.innerHTML=`<section class="panel vstack"><h2>Policy</h2><p>Community guidelines placeholder.</p></section>` }
+function render(){ const {p,a,b}=route(); switch(p){case'home':return home();case'explore':return explore();case'work':return workView(a);case'publish':return publish();case'policy':return policy();default:return home()} }
+</script>
+<script>
+const c=document.getElementById('bg'),x=c.getContext('2d');function r(){c.width=innerWidth;c.height=innerHeight}addEventListener('resize',r);r();
+let s=Array.from({length:180},()=>({x:Math.random()*c.width,y:Math.random()*c.height,v:.1+Math.random()*.3,op:.2+Math.random()*.4}));
+(function t(){x.fillStyle='#0a1224';x.fillRect(0,0,c.width,c.height);x.fillStyle='rgba(124,198,255,.9)';for(const a of s){x.globalAlpha=a.op;x.fillRect(a.x,a.y,2,2);a.y+=a.v;if(a.y>c.height){a.y=-2;a.x=Math.random()*c.width}}requestAnimationFrame(t)})();</script>
+</body></html>
