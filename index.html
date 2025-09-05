@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OtakuHub — Create. Publish. Collaborate.</title>
-  <meta name="description" content="The creator-first platform for anime & manga: publish, collaborate in a studio workspace, and discover series with smart age gating."/>
-  <meta property="og:title" content="OtakuHub — Create. Publish. Collaborate."/>
-  <meta property="og:description" content="Publish manga & animation, run a studio, and connect with fans. Built-in ratings & age gating."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:image" content="assets/placeholder.svg"/>
+  <title>OtakuHub — Grande Pro V3.2</title>
+  <meta name="description" content="Creator-first platform for anime & manga — publish, collaborate, discover. Age gating included."/>
   <link rel="icon" href="assets/placeholder.svg"/>
   <link rel="stylesheet" href="style.css"/>
+  <noscript><style>#app::before{content:'Please enable JavaScript.';display:block;color:#fff;background:#c0392b;padding:12px;border-radius:8px}</style></noscript>
 </head>
 <body>
   <canvas id="bg"></canvas>
-  <div id="glow"></div>
-
   <header class="site-header">
     <div class="brand" onclick="location.hash='#/landing'">🎌 OtakuHub <span class="grand">GRANDE PRO</span></div>
     <nav class="nav">
@@ -23,37 +18,33 @@
       <a href="#/home">App</a>
       <a href="#/explore">Explore</a>
       <a href="#/market">Shop</a>
-      <a href="#/studio">Studio</a>
       <a href="#/forum">Forum</a>
       <a href="#/live">Live</a>
       <a href="#/advanced">Advanced</a>
-      <a href="#/publish" class="cta">Publish</a>
+      <a class="cta" href="#/publish">Publish</a>
     </nav>
   </header>
-
   <div id="toast"></div>
-  <main id="app"></main>
-
+  <main id="app" class="panel" style="margin:16px">Loading…</main>
   <footer class="site-footer">
-    <div class="footer-wrap">
-      <div>© <span id="year"></span> OtakuHub</div>
-      <div class="foot-links">
-        <a href="#/landing#features">Features</a>
-        <a href="#/landing#how">How it works</a>
-        <a href="#/landing#faq">FAQ</a>
-        <a href="#/policy">Policy</a>
-      </div>
-    </div>
+    <div>© <span id="year"></span> OtakuHub · <a href="#/policy">Policy</a></div>
   </footer>
 
-  <div id="cmdk" aria-hidden="true">
-    <input id="cmdk-input" placeholder="Jump to anything… (Ctrl / ⌘ + K)"/>
-    <div id="cmdk-results"></div>
-  </div>
-
-  <script src="data.js"></script>
-  <script src="app.js"></script>
-  <script src="bg.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+  <script defer src="data.js"></script>
+  <script defer src="app.js"></script>
+  <script defer src="bg.js"></script>
+  <script>
+    // Show a helpful message if any script fails to load.
+    window.addEventListener('error', function(e){
+      var app = document.getElementById('app');
+      if(app && !window.__BOOT_OK__){
+        app.innerHTML = '<div class="panel" style="border:1px solid #ff6b8a">'
+          + '<b>Boot error:</b> '+(e.message||'')+'<br/>'
+          + 'Make sure <code>index.html</code>, <code>app.js</code>, <code>data.js</code>, <code>bg.js</code> and the <code>assets/</code> folder are in the <u>same folder</u>.'
+          + '</div>';
+      }
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
