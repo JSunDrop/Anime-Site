@@ -1,11 +1,59 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>OtakuHub — Grande Pro V2</title>
-<link rel="stylesheet" href="style.css"/></head><body>
-<canvas id="bg"></canvas><div id="glow"></div>
-<header class="site-header"><div class="brand">🎌 OtakuHub <span class="grand">GRANDE PRO</span></div>
-<nav class="nav"><a href="#/">Home</a><a href="#/explore">Explore</a><a href="#/leaderboard">Leaderboard</a><a href="#/market">Shop</a><a href="#/studio">Studio</a><a href="#/advanced">Advanced</a><a href="#/forum">Forum</a><a href="#/live">Live</a><a href="#/account" class="cta">Account</a></nav></header>
-<main id="app"></main>
-<footer class="site-footer"><div>Prototype — no backend; FF7-blue theme 💙</div></footer>
-<script src="data.js"></script><script src="app.js"></script><script src="bg.js"></script>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OtakuHub — Create. Publish. Collaborate.</title>
+  <meta name="description" content="The creator-first platform for anime & manga: publish, collaborate in a studio workspace, and discover series with smart age gating."/>
+  <meta property="og:title" content="OtakuHub — Create. Publish. Collaborate."/>
+  <meta property="og:description" content="Publish manga & animation, run a studio, and connect with fans. Built-in ratings & age gating."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="assets/placeholder.svg"/>
+  <link rel="icon" href="assets/placeholder.svg"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <div id="glow"></div>
+
+  <header class="site-header">
+    <div class="brand" onclick="location.hash='#/landing'">🎌 OtakuHub <span class="grand">GRANDE PRO</span></div>
+    <nav class="nav">
+      <a href="#/landing">Overview</a>
+      <a href="#/home">App</a>
+      <a href="#/explore">Explore</a>
+      <a href="#/market">Shop</a>
+      <a href="#/studio">Studio</a>
+      <a href="#/forum">Forum</a>
+      <a href="#/live">Live</a>
+      <a href="#/advanced">Advanced</a>
+      <a href="#/publish" class="cta">Publish</a>
+    </nav>
+  </header>
+
+  <div id="toast"></div>
+  <main id="app"></main>
+
+  <footer class="site-footer">
+    <div class="footer-wrap">
+      <div>© <span id="year"></span> OtakuHub</div>
+      <div class="foot-links">
+        <a href="#/landing#features">Features</a>
+        <a href="#/landing#how">How it works</a>
+        <a href="#/landing#faq">FAQ</a>
+        <a href="#/policy">Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="cmdk" aria-hidden="true">
+    <input id="cmdk-input" placeholder="Jump to anything… (Ctrl / ⌘ + K)"/>
+    <div id="cmdk-results"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="bg.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+</body>
+</html>

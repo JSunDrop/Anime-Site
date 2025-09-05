@@ -1,15 +1,22 @@
-# OtakuHub — Next.js + Supabase (Enhanced)
-Features included (scaffold):
-- Supabase schema with age-based RLS (E/T/M/X), comments, forum, live chat, favorites, progress.
-- Basic pages: Home, Explore, Work, Advanced (DOB), Forum, Live Chat.
-- Realtime subscription for live chat.
-- Stripe Connect placeholders with 1% platform fee.
+# OtakuHub — Grande Pro V3 (Static Prototype)
 
-## Quick Start
-1) `npm i`
-2) Copy `.env.example` → `.env.local` and fill your Supabase URL + Anon Key.
-3) Apply SQL in `supabase/schema.sql` to your Supabase project.
-4) Enable Realtime for the `live_messages` table in Supabase.
-5) `npm run dev`
+What’s new in V3
+- **Professional landing page**: hero + KPIs, feature grid, how‑it‑works, FAQ, and strong CTAs to Enter App / Start a Studio.
+- **Command palette (Ctrl/⌘+K)** to jump anywhere quickly.
+- **Explore upgrades**: sort by Trending / Newest / Top Liked, plus tag filters.
+- **Reporting**: report a work with a reason; stored locally and gives a toast.
+- **Toasts**: small notifications for key actions.
+- Kept: Age gating by DOB, comments, forum, live chat, favorites, resume/start, marketplace with 1% fee.
 
-> Auth: use Supabase Auth (email magic link or OAuth) so `auth.uid()` works for RLS. Update the `SignIn` page to your preferred method.
+Run
+- Open `index.html`, or serve locally:
+```bash
+python3 -m http.server 8000
+# visit http://localhost:8000/#/landing
+```
+
+Deploy to GitHub Pages
+- Put the folder contents at the root of your GH Pages site or under a subfolder (hash routes work fine).
+
+Pro tip
+- In `index.html`, the default route goes to `#/landing`. If you want to start directly inside the app, change it to `#/home` in `app.js: route()`.
