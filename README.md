@@ -1,22 +1,20 @@
-# OtakuHub — Grande Edition (Static Prototype)
+# OtakuHub — Next.js + Supabase Starter
 
-A more cinematic, bolder version of the previous prototype with:
-- **Animated cosmic background** (canvas stars + subtle parallax glow)
-- **Cinematic hero** with CTAs
-- **Featured carousel** and **tag chips** with filters
-- **Bigger cards**, motion flourishes, soft glows, and FF7-inspired blue palette
-- Explore, Work/Reader, Leaderboard, Market with 1% platform fee breakdown
-- Studio & Publish flows (pages saved to localStorage)
+This is a minimal scaffold to move the prototype toward production:
 
-> No backend. Safe to host on GitHub Pages / Netlify / Vercel. Everything persists in localStorage.
+- **Next.js (App Router)** + **TypeScript**
+- **Supabase** for Auth/Postgres/Storage
+- **Stripe Connect (1% platform fee)** placeholders
+- Example pages: Home, Explore, Work, Studio, Office, Profile
+- API stubs for checkout, webhooks (Stripe), and signed uploads
 
-## Run
-Double-click `index.html` or serve locally:
-```bash
-python3 -m http.server 8000
-# then visit http://localhost:8000
-```
+> You'll need Node 18+, a Supabase project, and a Stripe account (Connect).
 
-## Notes
-- "Video" remains a placeholder. Replace with HLS when adding a backend.
-- Payments are simulated; swap `simulateCheckout()` with Stripe Connect later.
+## Quick Start
+1. `npm i`
+2. Copy `.env.example` to `.env.local` and fill values.
+3. `npm run dev`
+4. Apply the SQL in `supabase/schema.sql` to your Supabase DB.
+
+## Deploy
+- Vercel works great; set environment variables in your project settings.
