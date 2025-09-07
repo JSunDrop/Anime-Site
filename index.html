@@ -1,44 +1,122 @@
 <!doctype html>
 <html lang="en">
 <head>
- <meta charset="utf-8"/>
- <meta name="viewport" content="width=device-width, initial-scale=1"/>
- <title>OtakuHub — Grande Pro</title>
- <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dojinova — Cherry Night</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
- <div id="bg-layer"></div>
- <header class="topbar">
-  <div class="brand">OtakuHub <span class="badge"></span></div>
-  <nav class="tabs" id="nav">
-   <button data-route="#/home" class="pill active">Home</button>
-   <button data-route="#/explore" class="pill">Explore</button>
-   <button data-route="#/leaderboard" class="pill">Leaderboard</button>
-   <button data-route="#/shop" class="pill">Shop</button>
-   <button data-route="#/studio" class="pill">Studio</button>
-   <button data-route="#/forum" class="pill">Forum</button>
-   <button data-route="#/live" class="pill">Live</button>
-   <button data-route="#/discover" class="pill">Discover</button>
-   <button data-route="#/qa" class="pill">Q&amp;A</button>
-   <button data-route="#/publish" class="pill primary">Publish</button>
-  </nav>
- </header>
+  <div class="bg"></div>
 
- <main id="app" class="container"></main>
+  <header class="site-header">
+    <div class="wrap nav-wrap">
+      <div class="brand">
+        <img src="assets/dojinova-logo.png" alt="Dojinova" />
+        <span class="brand-word">Dojinova</span>
+      </div>
+      <nav class="main-nav">
+        <a class="pill active" href="#">Home</a>
+        <a class="pill" href="#explore">Explore</a>
+        <a class="pill" href="#leaderboard">Leaderboard</a>
+        <a class="pill" href="#studio">Studio</a>
+        <a class="pill" href="#forum">Forum</a>
+        <a class="pill" href="#live">Live</a>
+        <a class="pill" href="#discover">Discover</a>
+        <a class="pill" href="#qa">Q&A</a>
+      </nav>
+      <a class="btn primary" href="#publish">Publish</a>
+    </div>
+  </header>
 
- <footer class="footer">
-  <small>Prototype — no backend, no real payments. Cherry blossom theme 🌸</small>
- </footer>
+  <main class="wrap gap">
+    <section class="hero panel">
+      <div class="hero-copy">
+        <h1>Anime &amp; Manga, by the community,<br/>for the community</h1>
+        <p class="kicker"><strong>Welcome to the Future of Anime &amp; Manga.</strong> Read. Create. Earn. <em>Without the paywalls.</em></p>
+        <p>Dive into a world where anime and manga thrive—free from subscriptions, tokens, and money grabs. Whether you’re a fan looking to discover your next obsession or a creator ready to build your own studio, this is your home.</p>
+        <p><strong>For Fans:</strong> Browse, shop, and support your favorite stories directly. No hidden fees, no hoops—just pure content.</p>
+        <p><strong>For Creators:</strong> Launch your studio, gather a team, release your works, and set your own subscriptions if you choose. You keep <strong>99%</strong> of all profits—we only take <strong>1%</strong> to keep the lights on.</p>
+        <p>No middlemen. No nonsense. Just anime, manga, and the community that loves them.</p>
+        <div class="actions">
+          <a class="btn primary" href="#start">Start Publishing</a>
+          <a class="btn" href="#explore">Explore Works</a>
+        </div>
+      </div>
 
- <script>
-  window.__ASSETS__ = {
-   background: "assets/Moonlit Cherry Blossoms and Fireflies.png",
-   placeholderManga: "assets/no manga.png",
-   placeholderVideo: "assets/no video.png",
-   placeholderProfile: "assets/No Profile Image.png"
-  };
- </script>
- <script src="data.js"></script>
- <script src="app.js"></script>
+      <div class="featured panel subtle">
+        <div class="feat-head">
+          <h3>Featured</h3>
+          <div class="arrows">
+            <button class="pill sm" id="featPrev" aria-label="Previous">←</button>
+            <button class="pill sm" id="featNext" aria-label="Next">→</button>
+          </div>
+        </div>
+        <div class="feat-stage">
+          <div class="feat-card">
+            <img src="assets/no-manga.png" alt="cover"/>
+            <div class="meta">
+              <div class="t">Railgun Waltz</div>
+              <div class="by">by Mako Reactor</div>
+              <div class="tags">
+                <span class="tag">#action</span><span class="tag">#fantasy</span><span class="tag">#steampunk</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel subtle">
+      <div class="row-head">
+        <h3>Continue Reading / Watching</h3>
+        <div class="arrows">
+          <button class="pill sm scrollLeft">←</button>
+          <button class="pill sm scrollRight">→</button>
+        </div>
+      </div>
+      <div class="hscroll" id="continueRow">
+        <article class="card">
+          <img src="assets/no-manga.png" alt="cover"/>
+          <h4>Blade of Dawn</h4>
+          <div class="byline">by OniWorks</div>
+          <div class="tags"><span class="tag">#shounen</span><span class="tag">#adventure</span><span class="tag">#fantasy</span></div>
+        </article>
+        <article class="card">
+          <img src="assets/no-video.png" alt="cover"/>
+          <h4>Spark Runner</h4>
+          <div class="byline">by OniWorks</div>
+          <div class="tags"><span class="tag">#sci-fi</span><span class="tag">#action</span><span class="tag">#neon</span></div>
+        </article>
+        <article class="card">
+          <img src="assets/no-manga.png" alt="cover"/>
+          <h4>Azure Lullaby</h4>
+          <div class="byline">by Mako Reactor</div>
+          <div class="tags"><span class="tag">#drama</span><span class="tag">#music</span><span class="tag">#fantasy</span></div>
+        </article>
+        <article class="card">
+          <img src="assets/no-video.png" alt="cover"/>
+          <h4>Railgun Waltz</h4>
+          <div class="byline">by Mako Reactor</div>
+          <div class="tags"><span class="tag">#action</span><span class="tag">#fantasy</span><span class="tag">#steampunk</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel subtle">
+      <h3>Browse by Tag</h3>
+      <div class="tag-cloud">
+        <span class="tag">#action</span><span class="tag">#adventure</span><span class="tag">#drama</span>
+        <span class="tag">#fantasy</span><span class="tag">#music</span><span class="tag">#neon</span>
+        <span class="tag">#sci-fi</span><span class="tag">#shounen</span><span class="tag">#steampunk</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <small>© 2025 Dojinova</small>
+  </footer>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
