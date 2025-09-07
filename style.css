@@ -1,0 +1,233 @@
+:root{
+  --bg: transparent;
+  --card: rgba(255,255,255,.12);
+  --card-strong: rgba(255,255,255,.18);
+  --text: #dfe8ff;
+  --muted:#9bb0d0;
+  --pill:#142037;
+  --pill-hover:#1b2b49;
+  --pill-active:#61a5ff;
+  --accent:#61a5ff;
+  --ring: rgba(97,165,255,.4);
+  --shadow: 0 10px 40px rgba(0,0,0,.35);
+  --radius: 16px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; color:var(--text); background:var(--bg);
+  font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+  overflow-y:overlay;
+}
+#bg-layer{
+  position:fixed; inset:0;
+  background: center/cover no-repeat url(var(--bg-url));
+  filter: saturate(1.05) brightness(1);
+  z-index:-2;
+}
+body::after{ content:''; position:fixed; inset:0; pointer-events:none; background: transparent; z-index:-1; }
+
+.container{ width:min(1200px, 92vw); margin:80px auto 120px; }
+
+.topbar{
+  position:sticky; top:0; z-index:10; backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(10,15,25,.25), rgba(10,15,25,.15));
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.brand{ padding:14px 20px; font-weight:800; letter-spacing:.4px }
+.badge{ font-weight:700; font-size:.875rem; color:var(--muted) }
+
+.tabs{ display:flex; gap:10px; padding:10px 20px 16px; flex-wrap:wrap }
+.pill{
+  background:var(--pill); color:#cfe2ff; border:1px solid rgba(255,255,255,.18);
+  padding:10px 16px; border-radius:999px; cursor:pointer;
+  transition:.18s ease; box-shadow:0 1px 0 rgba(255,255,255,.05) inset;
+}
+.pill:hover{ background:var(--pill-hover); transform:translateY(-1px) }
+.pill.active{ background:var(--pill-active); color:#0b1020 }
+.pill.primary{ background:var(--accent); color:#071222; font-weight:700 }
+.pill.primary:hover{ filter:brightness(1.05) }
+
+.grid{ display:grid; gap:18px }
+.grid.cols-3{ grid-template-columns: repeat(3, 1fr) }
+@media (max-width:900px){ .grid.cols-3{ grid-template-columns:1fr } }
+
+.card{
+  background:var(--card); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,.18);
+  border-radius:var(--radius); box-shadow:var(--shadow); backdrop-filter: blur(10px);
+}
+.panel{ padding:22px }
+.hero{ display:grid; grid-template-columns: 1.1fr .9fr; gap:24px }
+@media (max-width:900px){ .hero{ grid-template-columns:1fr } }
+
+h1{ font-size: clamp(28px, 3.6vw, 44px); margin:0 0 10px; line-height:1.1 }
+.lead{ color:var(--muted) }
+
+.actions{ display:flex; gap:12px; margin:12px 0 0 }
+.btn{
+  background:var(--accent); color:#061326; border:0; font-weight:800;
+  padding:12px 16px; border-radius:12px; cursor:pointer; transition:.17s ease;
+  box-shadow: 0 6px 18px var(--ring);
+}
+.btn:hover{ filter:brightness(1.06) transform:translateY(-1px) }
+.btn.ghost{ background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.18) }
+.btn.ghost:hover{ background:rgba(255,255,255,.06) }
+
+.badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px }
+.tag{
+  padding:6px 10px; border-radius:999px; font-size:.82rem;
+  background:rgba(255,255,255,.04); color:#aaccff; border:1px solid rgba(255,255,255,.06)
+}
+
+.carousel{ position:relative; overflow:hidden }
+.carousel-viewport{ display:flex; transition: transform .45s ease; }
+.slide{ flex:0 0 100%; height:160px; display:flex; align-items:center; justify-content:center }
+.cover{ backdrop-filter: blur(10px); 
+  width:100%; height:100%; border-radius:14px; background:var(--card);
+  display:grid; grid-template-columns: 95px 1fr; gap:16px; padding:16px; border:1px solid rgba(255,255,255,.18)
+}
+.cover img{ width:100%; height:100%; object-fit:cover; border-radius:10px }
+.meta { align-self:center }
+.meta .title{ font-weight:800; margin-bottom:6px }
+.meta .by{ color:var(--muted); font-size:.9rem; margin-bottom:6px }
+
+.carousel .nav{
+  position:absolute; bottom:12px; left:12px; display:flex; gap:8px
+}
+.icon-btn{
+  width:36px; height:36px; display:grid; place-items:center; border-radius:10px; cursor:pointer;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:#dfe8ff
+}
+.icon-btn:hover{ background:rgba(255,255,255,.12) }
+
+.scroller{ overflow:auto hidden; padding-bottom:6px }
+.tile{
+  display:grid; grid-template-rows: 180px auto; border-radius:14px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.18); background:var(--card)
+}
+.tile img{ width:100%; height:100%; object-fit:cover }
+.tile .tile-body{ padding:10px 12px }
+.tile h4{ margin:2px 0 6px; font-size:1rem }
+.footer{ text-align:center; color:var(--muted); margin:30px 0 60px }
+
+/* === Custom tweaks from user request === */
+.tag{
+  display:inline-flex;
+  align-items:center;
+  padding:6px 12px;
+  border-radius:9999px;
+  background:var(--pill);
+  border:1px solid rgba(255,255,255,.18);
+  white-space:nowrap;
+  line-height:1;
+  height:auto;
+}
+.tag:hover{ background:var(--pill-hover) }
+.tag:active{ outline:2px solid var(--ring) }
+
+/* Horizontal list for Continue Reading / Watching */
+.hlist{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  padding-bottom:8px;
+  scroll-snap-type:x proximity;
+}
+.hlist .tile{
+  width:200px;
+  flex:0 0 auto;
+  scroll-snap-align:start;
+}
+
+/* Make cards slightly more transparent and ensure all panels show the background */
+.card{
+  backdrop-filter: blur(6px);
+}
+
+
+/* === UI polish to match reference === */
+
+/* Move Featured nav to bottom-right and align buttons + 'See all →' */
+.carousel .nav{
+  position:absolute;
+  bottom:12px;
+  right:12px;
+  left:auto;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+/* Pill button (used for 'See all →') */
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 12px;
+  border-radius:9999px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  color:var(--text);
+  cursor:pointer;
+  font-weight:600;
+}
+.pill:hover{ background:rgba(255,255,255,.12) }
+.pill:active{ background:rgba(255,255,255,.16) }
+
+/* Make hero/featured panels slightly more glassy */
+.card.panel{
+  background: var(--card);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow: var(--shadow);
+}
+
+/* Buttons spacing on hero actions */
+.actions .btn{ border-radius:14px; padding:10px 16px }
+
+
+/* Transparency and polish */
+.card, .panel{
+  background: rgba(13,20,34,0.25) !important;
+  backdrop-filter: blur(10px);
+}
+#featured .cover{ backdrop-filter: blur(10px); 
+  background: rgba(13,20,34,0.3);
+}
+
+/* Continue Reading scroller arrows */
+.hlist-container{
+  position:relative;
+}
+.hlist-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.hlist-nav.left{ left:0; }
+.hlist-nav.right{ right:0; }
+.hlist-nav button{
+  width:36px; height:36px; display:grid; place-items:center;
+  border-radius:10px; border:1px solid rgba(255,255,255,.15);
+  background:rgba(0,0,0,.25); color:var(--text); cursor:pointer;
+}
+.hlist-nav button:hover{ background:rgba(0,0,0,.4); }
+
+
+/* Controls for the Continue scroller */
+.scroller-wrap{ position:relative }
+.scroller-wrap .nav{
+  position:absolute; right:12px; bottom:8px; display:flex; gap:8px;
+}
+.scroller-wrap .viewport{ overflow-x:auto; }
+
+/* Subtle text glow to keep readability on bright blossoms */
+.text-glow, .hero h1, .lead, .meta .title {
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+
+/* v5 glass glow */
+.hero h1, .lead, .meta .title, .btn { text-shadow: 0 1px 2px rgba(0,0,0,.35); }

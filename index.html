@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ <title>OtakuHub — Grande Pro</title>
+ <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+ <div id="bg-layer"></div>
+ <header class="topbar">
+  <div class="brand">OtakuHub <span class="badge"></span></div>
+  <nav class="tabs" id="nav">
+   <button data-route="#/home" class="pill active">Home</button>
+   <button data-route="#/explore" class="pill">Explore</button>
+   <button data-route="#/leaderboard" class="pill">Leaderboard</button>
+   <button data-route="#/shop" class="pill">Shop</button>
+   <button data-route="#/studio" class="pill">Studio</button>
+   <button data-route="#/forum" class="pill">Forum</button>
+   <button data-route="#/live" class="pill">Live</button>
+   <button data-route="#/discover" class="pill">Discover</button>
+   <button data-route="#/qa" class="pill">Q&amp;A</button>
+   <button data-route="#/publish" class="pill primary">Publish</button>
+  </nav>
+ </header>
+
+ <main id="app" class="container"></main>
+
+ <footer class="footer">
+  <small>Prototype — no backend, no real payments. Cherry blossom theme 🌸</small>
+ </footer>
+
+ <script>
+  window.__ASSETS__ = {
+   background: "assets/Moonlit Cherry Blossoms and Fireflies.png",
+   placeholderManga: "assets/no manga.png",
+   placeholderVideo: "assets/no video.png",
+   placeholderProfile: "assets/No Profile Image.png"
+  };
+ </script>
+ <script src="data.js"></script>
+ <script src="app.js"></script>
+</body>
+</html>
