@@ -6,34 +6,77 @@
   <title>Dojinova — Log In</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="with-sidebar">
   <div class="bg"></div>
-
   <header class="site-header"></header>
 
+  <main class="wrap">
+    <div class="auth-wrap">
+      <section class="auth-card">
 
-  <main class="wrap gap">
+        <!-- Left: glossy hero panel -->
+        <div class="auth-hero">
+          <a class="brand" href="index.html" aria-label="Dojinova">
+            <img src="assets/dojinova-logo.png" alt="Dojinova logo" />
+          </a>
+          <h3>Welcome back</h3>
+          <p class="tagline">Pick up where you left off, save your favorites, and support creators.</p>
 
-    <section class="panel subtle" style="max-width:520px;margin:0 auto;">
-      <h2>Log In</h2>
-      <form id="loginForm" class="gap" style="display:grid;">
-        <label>Email
-          <input id="email" type="email" placeholder="you@example.com" style="width:100%;padding:12px;border-radius:12px;border:1px solid rgba(126,162,220,.28);background:rgba(126,162,220,.08);color:#dce9ff;">
-        </label>
-        <label>Password
-          <input id="password" type="password" placeholder="••••••••" style="width:100%;padding:12px;border-radius:12px;border:1px solid rgba(126,162,220,.28);background:rgba(126,162,220,.08);color:#dce9ff;">
-        </label>
-        <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;">
-          <label style="display:flex;gap:8px;align-items:center;font-size:14px;color:var(--muted)">
-            <input id="remember" type="checkbox"> Remember me
-          </label>
-          <a class="pill sm" href="#">Forgot?</a>
+          <ul class="benefits">
+            <li>99% of revenue goes to creators</li>
+            <li>Save lists &amp; continue across devices</li>
+            <li>No subscriptions required</li>
+          </ul>
         </div>
-        <button type="submit" class="btn primary" style="justify-content:center;">Log In</button>
-        <p class="kicker" style="text-align:center;">No account? <a class="pill sm" href="#">Sign up</a></p>
-      </form>
-    </section>
 
+        <!-- Right: form -->
+        <div class="auth-form panel subtle">
+          <h2 class="auth-title">Log In</h2>
+
+          <div class="social">
+  <a class="btn social-btn google" href="#" aria-label="Continue with Google">
+    <!-- G icon -->
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.35 11.1H12v2.8h5.33c-.24 1.5-1.8 4.4-5.33 4.4A6.4 6.4 0 1 1 12 5.2a5.9 5.9 0 0 1 4.15 1.62l1.96-1.96A8.7 8.7 0 0 0 12 2.5 8.9 8.9 0 1 0 20.9 12c0-.3-.03-.6-.05-.9z"/></svg>
+    <span>Continue with Google</span>
+  </a>
+
+  <a class="btn social-btn discord" href="#" aria-label="Continue with Discord">
+    <!-- Discord icon -->
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.3 5.4A16 16 0 0 0 15.8 4l-.33.65a11 11 0 0 1 2.6.96c-1.6-.75-3.3-1.1-5.02-1.1s-3.45.35-5.03 1.1c.9-.42 1.74-.74 2.6-.96L10.3 4c-1.54.26-2.98.76-4.5 1.4C3.4 9.2 3 12.9 3.2 16.6a16 16 0 0 0 4.98 2.4l.7-.93c-.86-.3-1.67-.72-2.42-1.24l.6.3a12 12 0 0 0 11.88 0l.6-.3c-.75.52-1.56.94-2.42 1.24l.7.93a16 16 0 0 0 4.98-2.4c.25-3.74-.14-7.4-1.9-11.2zM9.5 14.8c-.9 0-1.64-.86-1.64-1.9s.74-1.88 1.64-1.88 1.65.84 1.65 1.88-.74 1.9-1.65 1.9zm5 0c-.9 0-1.64-.86-1.64-1.9s.74-1.88 1.64-1.88 1.65.84 1.65 1.88-.74 1.9-1.65 1.9z"/></svg>
+    <span>Continue with Discord</span>
+  </a>
+</div>
+
+
+          <div class="sep"><span>or with email</span></div>
+
+          <form id="loginForm" novalidate>
+            <div class="field">
+              <!-- mail icon -->
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <input id="email" type="email" class="input" placeholder="you@example.com" required />
+            </div>
+
+            <div class="field">
+              <!-- lock icon -->
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17a2 2 0 100-4 2 2 0 000 4zm6-6h-1V9a5 5 0 00-10 0v2H6a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2zm-3 0H9V9a3 3 0 016 0v2z"/></svg>
+              <input id="password" type="password" class="input" placeholder="••••••••" />
+            </div>
+
+            <div class="form-actions">
+              <label class="remember"><input id="remember" type="checkbox" /> Remember me</label>
+              <a href="#" class="nav-link">Forgot password?</a>
+            </div>
+
+            <button class="btn primary block" type="submit">Sign In</button>
+
+            <p class="alt">New here? <a class="nav-link" href="#">Create an account</a></p>
+            <p class="kicker">Demo only — stores a token in localStorage.</p>
+          </form>
+        </div>
+
+      </section>
+    </div>
   </main>
 
   <footer class="wrap footer">

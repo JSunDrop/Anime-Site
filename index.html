@@ -6,30 +6,33 @@
   <title>Dojinova — Home</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="with-sidebar">
   <div class="bg"></div>
-
-<header class="site-header"></header>
-
-
-
+  <header class="site-header"></header>
 
   <main class="wrap gap">
-<section class="hero panel">
+    <!-- HERO -->
+    <section class="hero panel subtle">
       <div class="hero-copy">
-        <h1>Anime &amp; Manga, by the community,<br/>for the community</h1>
+        <h1>Anime &amp; Manga, by the community,<br>for the community</h1>
         <p class="kicker"><strong>Welcome to the Future of Anime &amp; Manga.</strong> Read. Create. Earn. <em>Without the paywalls.</em></p>
+
         <p>Dive into a world where anime and manga thrive—free from subscriptions, tokens, and money grabs. Whether you’re a fan looking to discover your next obsession or a creator ready to build your own studio, this is your home.</p>
+
         <p><strong>For Fans:</strong> Browse, shop, and support your favorite stories directly. No hidden fees, no hoops—just pure content.</p>
+
         <p><strong>For Creators:</strong> Launch your studio, gather a team, release your works, and set your own subscriptions if you choose. You keep <strong>99%</strong> of all profits—we only take <strong>1%</strong> to keep the lights on.</p>
+
         <p>No middlemen. No nonsense. Just anime, manga, and the community that loves them.</p>
+
         <div class="actions">
-          <a class="btn primary" href="#start">Start Publishing</a>
-          <a class="btn" href="#explore">Explore Works</a>
+          <a class="btn primary" href="publish.html" id="start">Start Publishing</a>
+          <a class="btn" href="explore.html" id="explore">Explore Works</a>
         </div>
       </div>
 
-      <div class="featured panel subtle">
+      <!-- FEATURED -->
+      <aside class="featured panel subtle">
         <div class="feat-head">
           <h3>Featured</h3>
           <div class="arrows">
@@ -37,63 +40,35 @@
             <button class="pill sm" id="featNext" aria-label="Next">→</button>
           </div>
         </div>
-        <div class="feat-stage">
-          <div class="feat-card">
-            <img src="assets/no-manga.png" alt="cover"/>
-            <div class="meta">
-              <div class="t">Railgun Waltz</div>
-              <div class="by">by Mako Reactor</div>
-              <div class="tags">
-                <span class="tag">#action</span><span class="tag">#fantasy</span><span class="tag">#steampunk</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <div class="feat-stage"></div> <!-- JS injects two cards -->
+      </aside>
     </section>
 
-    <section class="panel subtle">
+    <!-- Example horizontal row (optional content you can replace) -->
+    <section class="panel">
       <div class="row-head">
         <h3>Continue Reading / Watching</h3>
-        <div class="arrows">
+        <div>
           <button class="pill sm scrollLeft">←</button>
           <button class="pill sm scrollRight">→</button>
         </div>
       </div>
-      <div class="hscroll" id="continueRow">
+      <div class="hscroll">
         <article class="card">
-          <img src="assets/no-manga.png" alt="cover"/>
-          <h4>Blade of Dawn</h4>
-          <div class="byline">by OniWorks</div>
-          <div class="tags"><span class="tag">#shounen</span><span class="tag">#adventure</span><span class="tag">#fantasy</span></div>
+          <img src="assets/no-manga.png" alt="">
+          <h4>Placeholder — Manga</h4>
+          <div class="byline">by Creator</div>
         </article>
         <article class="card">
-          <img src="assets/no-video.png" alt="cover"/>
-          <h4>Spark Runner</h4>
-          <div class="byline">by OniWorks</div>
-          <div class="tags"><span class="tag">#sci-fi</span><span class="tag">#action</span><span class="tag">#neon</span></div>
+          <img src="assets/no-video.png" alt="">
+          <h4>Placeholder — Video</h4>
+          <div class="byline">by Creator</div>
         </article>
         <article class="card">
-          <img src="assets/no-manga.png" alt="cover"/>
-          <h4>Azure Lullaby</h4>
-          <div class="byline">by Mako Reactor</div>
-          <div class="tags"><span class="tag">#drama</span><span class="tag">#music</span><span class="tag">#fantasy</span></div>
+          <img src="assets/no-manga.png" alt="">
+          <h4>Placeholder — Manga</h4>
+          <div class="byline">by Creator</div>
         </article>
-        <article class="card">
-          <img src="assets/no-video.png" alt="cover"/>
-          <h4>Railgun Waltz</h4>
-          <div class="byline">by Mako Reactor</div>
-          <div class="tags"><span class="tag">#action</span><span class="tag">#fantasy</span><span class="tag">#steampunk</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="panel subtle">
-      <h3>Browse by Tag</h3>
-      <div class="tag-cloud">
-        <span class="tag">#action</span><span class="tag">#adventure</span><span class="tag">#drama</span>
-        <span class="tag">#fantasy</span><span class="tag">#music</span><span class="tag">#neon</span>
-        <span class="tag">#sci-fi</span><span class="tag">#shounen</span><span class="tag">#steampunk</span>
       </div>
     </section>
   </main>

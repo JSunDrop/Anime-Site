@@ -243,3 +243,232 @@ body{
   .featured .feat-card{ grid-template-columns:130px 1fr; }
   .featured .feat-card img{ width:130px; height:170px; }
 }
+/* ============================================================
+   10) AUTH PAGES (Login / Register)
+   ============================================================ */
+.auth-wrap{
+  min-height: calc(100vh - 140px);
+  display: grid; place-items: center;
+  padding: 24px 0 32px;
+}
+.auth-card{
+  width: min(980px, 100%);
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid rgba(126,162,220,.12);
+  box-shadow: var(--shadow);
+}
+
+/* Left column: glossy hero */
+.auth-hero{
+  position: relative;
+  padding: 28px;
+  background:
+    radial-gradient(1000px 400px at 20% -10%, rgba(120,170,255,.18), transparent 60%),
+    linear-gradient(180deg, rgba(10,18,28,.35), rgba(10,18,28,.15));
+}
+.auth-hero .brand{ display:inline-flex; }
+.auth-hero .brand img{
+  height: 72px; width:auto; object-fit: contain;
+  filter: drop-shadow(0 12px 30px rgba(0,0,0,.55));
+}
+.auth-hero h3{ margin:18px 0 6px; font-size:28px; }
+.auth-hero .tagline{ color:var(--muted); margin:0 0 14px; }
+.auth-hero .benefits{ margin:10px 0 0; padding-left: 18px; opacity:.95; }
+.auth-hero .benefits li{ margin:6px 0; }
+
+/* Right column: form */
+.auth-form{ padding: 26px; backdrop-filter: blur(6px); }
+.auth-title{ margin: 0 0 12px; }
+
+.social{ display:flex; gap:10px; margin-bottom:12px; }
+.social .btn{ flex:1; justify-content:center; height:42px; border-radius:20px; }
+
+.sep{
+  display:flex; align-items:center; gap:12px; color:var(--muted);
+  margin: 8px 0 14px;
+}
+.sep::before, .sep::after{
+  content:""; flex:1; height:1px; background: rgba(220,233,255,.18);
+}
+
+.field{ position:relative; margin-bottom:12px; }
+.field svg{
+  position:absolute; left:12px; top:50%; transform:translateY(-50%);
+  width:18px; height:18px; opacity:.65; pointer-events:none;
+}
+.input{
+  width:100%; height:44px; border-radius:12px;
+  background: rgba(126,162,220,.10);
+  border:1px solid rgba(126,162,220,.25);
+  color:var(--text); padding:0 14px 0 40px;
+}
+.input:focus{ outline:none; border-color: rgba(126,162,220,.45); background: rgba(126,162,220,.14); }
+
+.form-actions{ display:flex; align-items:center; justify-content:space-between; margin: 6px 0 14px; }
+.remember{ display:inline-flex; align-items:center; gap:8px; color:#cfe2ff; opacity:.95; }
+
+.btn.block{ width:100%; justify-content:center; height:44px; border-radius:22px; }
+.alt{ text-align:center; margin-top:12px; }
+
+@media (max-width: 980px){
+  .auth-card{ grid-template-columns:1fr; }
+  .auth-hero{ display:none; }
+}
+/* Tweak: nudge the Save pill down inside Featured cards */
+.featured .feat-card .meta .pill,
+.featured .feat-card .pill {          /* fallback if meta wrapper differs */
+  margin-top: 6px;
+  align-self: flex-start;
+}
+
+@media (max-width: 1100px){
+  .featured .feat-card .meta .pill,
+  .featured .feat-card .pill {
+    margin-top: 8px;                  /* a touch more on tighter screens */
+  }
+}
+/* Social sign-in pills (polished) */
+.social{ display:flex; gap:12px; margin-bottom:12px; }
+.social-btn{
+  display:inline-flex; align-items:center; gap:8px; flex:1;
+  height:44px; padding:0 14px; border-radius:22px;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(0,0,0,.08));
+  border:1px solid rgba(126,162,220,.28);
+  color:#dce9ff; text-decoration:none;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.social-btn svg{ width:18px; height:18px; opacity:.95; }
+.social-btn:hover{ transform: translateY(-1px); background: rgba(126,162,220,.14); border-color: rgba(126,162,220,.45); box-shadow: 0 6px 18px rgba(10,18,28,.35); }
+.social-btn:active{ transform: translateY(0); box-shadow:none; }
+
+/* Brand-ish accents on hover */
+.social-btn.google:hover { border-color:#4285F4; box-shadow:0 8px 22px rgba(66,133,244,.35); }
+.social-btn.discord:hover{ border-color:#5865F2; box-shadow:0 8px 22px rgba(88,101,242,.35); }
+/* Social pills = same blue as the primary Sign In button */
+.social-btn.google,
+.social-btn.discord{
+  /* reuse your primary button look (with safe fallbacks) */
+  background:
+    var(--btn-primary-bg,
+      linear-gradient(180deg,
+        var(--brand, #78b6ff),
+        var(--brand-700, #3b82f6)
+      )
+    );
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 10px 26px rgba(120,170,255,.35);
+  transform: translateY(0);
+}
+
+.social-btn.google:hover,
+.social-btn.discord:hover{
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(120,170,255,.45);
+}
+
+.social-btn.google:active,
+.social-btn.discord:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
+}
+
+/* keep icons white on blue */
+.social-btn.google svg,
+.social-btn.discord svg{ color:#fff; opacity:.95; }
+/* Make Google + Discord pills match the Sign In button */
+.social-btn.google,
+.social-btn.discord{
+  /* same size/shape as primary button */
+  height: 44px;
+  border-radius: 22px;
+
+  /* same dark blue fill + no border */
+  background:
+    var(--btn-primary-bg,
+      linear-gradient(180deg,
+        var(--brand, #78b6ff),
+        var(--brand-700, #3b82f6)
+      )
+    );
+  color: #fff;
+  border: none;
+
+  /* center content like Sign In */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+
+  /* keep wording on one line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* same motion/glow feel */
+  box-shadow: 0 10px 26px rgba(120,170,255,.35);
+  transform: translateY(0);
+  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+}
+
+/* optional: remove icons to look exactly like Sign In */
+.social-btn.google svg,
+.social-btn.discord svg { display: none; }
+
+/* hover/press like Sign In */
+.social-btn.google:hover,
+.social-btn.discord:hover{
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(120,170,255,.45);
+}
+.social-btn.google:active,
+.social-btn.discord:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
+}
+
+/* If space gets tight, stack them so wording never wraps */
+@media (max-width: 560px){
+  .social{ flex-direction: column; }
+}
+/* --- Social pills: no glow, black text --- */
+.auth-form .social .social-btn.google,
+.auth-form .social .social-btn.discord{
+  /* keep the same fill as Sign In, but remove the glow */
+  background:
+    var(--btn-primary-bg,
+      linear-gradient(180deg, var(--brand, #78b6ff), var(--brand-700, #3b82f6))
+    );
+  color:#000;                   /* black text */
+  box-shadow:none !important;   /* kill glow */
+  filter:none !important;
+  border:none;
+}
+
+/* icons also dark so they match the text (if you're showing them) */
+.auth-form .social .social-btn.google svg,
+.auth-form .social .social-btn.discord svg{
+  display:inline;               /* or leave as-is if you hid them earlier */
+  color:#000;
+  opacity:.75;
+}
+
+/* hover/active: no glow or lift */
+.auth-form .social .social-btn.google:hover,
+.auth-form .social .social-btn.discord:hover{
+  transform:none;
+  box-shadow:none;
+  filter:none;
+}
+.auth-form .social .social-btn.google:active,
+.auth-form .social .social-btn.discord:active{
+  transform:none;
+  box-shadow:none;
+}
