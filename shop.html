@@ -6,28 +6,74 @@
   <title>Dojinova — Shop</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="with-sidebar">
+<body>
   <div class="bg"></div>
-  <header class="site-header"></header>
 
-  <main class="wrap gap">
-    <section class="panel subtle">
+  <aside class="side-nav">
+    <div class="brand">
+      <a href="index.html"><img src="assets/dojinova-logo.png" alt="Dojinova logo"/></a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a class="active" href="shop.html">Shop</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="studio.html">Studio</a></li>
+        <li><a href="forum.html">Forum</a></li>
+        <li><a href="live.html">Live</a></li>
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="qa.html">Q&A</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <header class="site-header">
+    <div class="nav-right">
+      <button class="icon-btn search" aria-label="Search"></button>
+      <a class="pill" href="saved.html">Saved</a>
+      <a class="pill" href="login.html">Log In</a>
+      <button class="icon-btn menu" aria-label="Menu"></button>
+    </div>
+  </header>
+
+  <main class="wrap gap" style="max-width:1200px;margin-left:320px">
+    <section class="panel">
       <h2>Shop</h2>
-      <p>Buy official merch, prints, and bundles. (Placeholder)</p>
-      <div class="grid">
-        <article class="card">
-          <img src="assets/no-manga.png" alt="">
-          <h4>Manga Print — Placeholder</h4>
-          <div class="byline">by Creator</div>
-        </article>
-        <article class="card">
-          <img src="assets/no-video.png" alt="">
-          <h4>Poster — Placeholder</h4>
-          <div class="byline">by Creator</div>
-        </article>
+      <p>Buy official merch, prints, and creator bundles. (Placeholder)</p>
+    </section>
+
+    <section class="panel subtle">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="pill sm active" data-filter="all">All</button>
+          <button class="pill sm" data-filter="print">Prints</button>
+          <button class="pill sm" data-filter="poster">Posters</button>
+          <button class="pill sm" data-filter="bundle">Bundles</button>
+        </div>
+        <button class="btn" id="openCart">Cart (<span id="cartCount">0</span>)</button>
+      </div>
+
+      <div class="grid" id="shopGrid" style="--cols:3;gap:16px">
+        <!-- Filled by app.js -->
       </div>
     </section>
   </main>
+
+  <!-- Cart drawer -->
+  <aside id="cartDrawer" class="panel" style="position:fixed;right:20px;top:80px;width:360px;max-height:75vh;overflow:auto;display:none;z-index:60">
+    <h3 style="margin-top:0">Your cart</h3>
+    <div id="cartItems" style="display:grid;gap:10px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+      <strong>Total</strong>
+      <strong id="cartTotal">$0.00</strong>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <button class="pill" id="closeCart">Close</button>
+      <button class="btn" id="checkoutBtn">Checkout</button>
+    </div>
+  </aside>
 
   <footer class="wrap footer">
     <small>© 2025 Dojinova</small>

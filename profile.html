@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dojinova — Profile</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <!-- header + sidebar are injected by app.js -->
+  <header class="site-header"></header>
+
+  <!-- Root needed by Step 4 JS -->
+  <main id="profile-root" class="wrap gap">
+
+    <!-- Profile header -->
+    <section class="panel subtle profile-hero">
+      <div class="profile-hero-inner">
+
+        <!-- Avatar (click to change) -->
+        <label class="pf-avatar" id="pfAvatar" aria-label="Change profile picture">
+          <img id="pfAvatarImg" class="profile-avatar" src="assets/no-profile.png" alt="Profile picture" width="72" height="72" />
+          <input id="pfAvatarFile" type="file" accept="image/*" />
+          <span class="change">Change</span>
+        </label>
+
+        <div class="profile-head">
+          <h2 class="profile-name" data-profile-name>Your Display Name</h2>
+          <p class="muted">@username • Joined 2025</p>
+
+          <div class="profile-actions">
+            <button id="editProfileBtn" class="btn sm pill">Edit Profile</button>
+            <button id="shareProfileBtn" class="pill sm share-btn">Share</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Layout: left info, right tabs -->
+    <div class="grid-2">
+      <!-- Left column: About -->
+      <aside class="panel subtle profile-side">
+        <h3>About</h3>
+        <p class="muted" data-profile-bio>Short bio goes here. Creator / Fan / Studio owner.</p>
+
+        <div class="kv">
+          <span>Followers</span><strong>0</strong>
+          <span>Following</span><strong>0</strong>
+          <span>Works</span><strong>0</strong>
+        </div>
+
+        <div class="links">
+          <a id="pfLinkSite" href="#" target="_blank" rel="noopener">Website</a>
+          <a id="pfLinkTw" href="#" target="_blank" rel="noopener">Twitter</a>
+          <a id="pfLinkDisc" href="#" target="_blank" rel="noopener">Discord</a>
+        </div>
+      </aside>
+
+      <!-- Right column: Tabs -->
+      <section class="panel subtle profile-main">
+
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="overview">Overview</button>
+          <button class="tab-btn" data-tab="library">Library</button>
+          <button class="tab-btn" data-tab="saved">Saved</button>
+          <button class="tab-btn" data-tab="purchases">Purchases</button>
+          <button class="tab-btn" data-tab="following">Following</button>
+          <button class="tab-btn" data-tab="settings">Settings</button>
+        </div>
+
+        <div class="tab-pane active" data-panel="overview" id="tab-overview">
+          <h3>Overview</h3>
+          <p class="muted">Highlights of your activity will show here.</p>
+        </div>
+
+        <div class="tab-pane" data-panel="library" id="tab-library" hidden>
+          <h3>Your Library</h3>
+          <p class="muted">Created works, drafts, and releases (placeholders).</p>
+        </div>
+
+        <div class="tab-pane" data-panel="saved" id="tab-saved" hidden>
+          <h3>Saved</h3>
+          <p class="muted">Items you’ve saved for later (placeholders).</p>
+        </div>
+
+        <div class="tab-pane" data-panel="purchases" id="tab-purchases" hidden>
+          <h3>Purchases</h3>
+          <p class="muted">History and receipts (placeholders).</p>
+        </div>
+
+        <div class="tab-pane" data-panel="following" id="tab-following" hidden>
+          <h3>Following</h3>
+          <p class="muted">Creators and studios you follow (placeholders).</p>
+        </div>
+
+        <div class="tab-pane" data-panel="settings" id="tab-settings" hidden>
+          <h3>Settings</h3>
+          <ul class="settings-list">
+            <li><a href="team-settings.html" class="pill sm">Team / Studio</a></li>
+            <li><a href="login.html" class="pill sm">Security &amp; Login</a></li>
+            <li><a href="#" class="pill sm">Notifications</a></li>
+            <li><a href="#" class="pill sm">Privacy</a></li>
+          </ul>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- Edit Profile dialog (demo) -->
+  <dialog id="editProfile" class="panel" style="max-width:560px;">
+    <h3>Edit Profile</h3>
+
+    <label class="meta">Display Name</label>
+    <input id="pfName" class="input" placeholder="Your Display Name" />
+
+    <label class="meta" style="margin-top:10px;">Bio</label>
+    <textarea id="pfBio" class="input" rows="4" placeholder="Tell people about you…"></textarea>
+
+    <label class="meta" style="margin-top:10px;">Website URL</label>
+    <input id="pfSite" class="input" placeholder="https://…" />
+
+    <label class="meta" style="margin-top:10px;">Twitter URL</label>
+    <input id="pfTw" class="input" placeholder="https://twitter.com/…" />
+
+    <label class="meta" style="margin-top:10px;">Discord (invite or @handle)</label>
+    <input id="pfDisc" class="input" placeholder="https://discord.gg/… or @handle" />
+
+    <label class="meta" style="margin-top:12px;">Profile picture</label>
+    <input id="pfAvatarFileModal" type="file" accept="image/*" class="input" />
+
+    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:14px;">
+      <button class="pill" onclick="document.getElementById('editProfile').close()">Cancel</button>
+      <button id="pfSaveBtn" class="pill primary">Save</button>
+    </div>
+  </dialog>
+
+  <footer class="wrap footer">
+    <small>© <span id="y"></span> Dojinova</small>
+  </footer>
+
+  <script>document.getElementById('y')?.append(new Date().getFullYear());</script>
+  <script src="js/app.js"></script>
+</body>
+</html>

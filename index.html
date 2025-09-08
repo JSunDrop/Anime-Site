@@ -45,32 +45,37 @@
     </section>
 
     <!-- Example horizontal row (optional content you can replace) -->
-    <section class="panel">
-      <div class="row-head">
-        <h3>Continue Reading / Watching</h3>
-        <div>
-          <button class="pill sm scrollLeft">←</button>
-          <button class="pill sm scrollRight">→</button>
-        </div>
-      </div>
-      <div class="hscroll">
-        <article class="card">
-          <img src="assets/no-manga.png" alt="">
-          <h4>Placeholder — Manga</h4>
-          <div class="byline">by Creator</div>
-        </article>
-        <article class="card">
-          <img src="assets/no-video.png" alt="">
-          <h4>Placeholder — Video</h4>
-          <div class="byline">by Creator</div>
-        </article>
-        <article class="card">
-          <img src="assets/no-manga.png" alt="">
-          <h4>Placeholder — Manga</h4>
-          <div class="byline">by Creator</div>
-        </article>
-      </div>
-    </section>
+ <section class="panel">
+  <div class="row-head">
+    <h3>Continue Reading / Watching</h3>
+    <div>
+      <button class="pill sm scrollLeft">←</button>
+      <button class="pill sm scrollRight">→</button>
+    </div>
+  </div>
+
+  <div class="hscroll">
+    <!-- was: <article class="card"> -->
+    <article class="card read-card" data-href="work.html?slug=placeholder-manga-1">
+      <img src="assets/no-manga.png" alt="">
+      <h4>Placeholder — Manga</h4>
+      <div class="byline">by Creator</div>
+    </article>
+
+    <article class="card read-card" data-href="work.html?slug=placeholder-video-1">
+      <img src="assets/no-video.png" alt="">
+      <h4>Placeholder — Video</h4>
+      <div class="byline">by Creator</div>
+    </article>
+
+    <article class="card read-card" data-href="work.html?slug=placeholder-manga-2">
+      <img src="assets/no-manga.png" alt="">
+      <h4>Placeholder — Manga</h4>
+      <div class="byline">by Creator</div>
+    </article>
+  </div>
+</section>
+
   </main>
 
   <footer class="wrap footer">
