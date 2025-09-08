@@ -1,196 +1,239 @@
+/* =========================
+   SHARED HEADER INJECTION
+   ========================= */
+function buildHeader(){
+  return `
+  <div class="wrap header-bar">
+    <!-- Brand (logo only) -->
+    <a class="brand" href="index.html" aria-label="Dojinova home">
+      <img src="assets/dojinova-logo.png" alt="Dojinova" />
+    </a>
 
-(() => {
-  const ASSETS = window.__ASSETS__ || {};
-  // set bg image on a CSS var so CSS can read it
-  document.documentElement.style.setProperty('--bg-url', ASSETS.background);
-  const _bg = document.getElementById('bg-layer');
-  if (_bg) _bg.style.backgroundImage = `url(${ASSETS.background})`;
+    <!-- LEFT: flat text nav like Crunchyroll -->
+    <nav class="nav-left">
+      <a class="nav-link" data-page="index.html" href="index.html">Home</a>
+      <a class="nav-link" data-page="explore.html" href="explore.html">Explore</a>
+      <a class="nav-link" data-page="shop.html" href="shop.html">Shop</a>
+      <a class="nav-link" data-page="leaderboard.html" href="leaderboard.html">Leaderboard</a>
 
-  const el = (sel, ctx=document) => ctx.querySelector(sel);
-  const app = el('#app');
+      <div class="nav-item">
+        <a class="nav-link" data-page="studio.html" href="studio.html">Studio</a>
+        <div class="dropdown">
+          <a href="publish.html">Publish</a>
+          <a href="my-projects.html">My Projects</a>
+          <a href="team-settings.html">Team Settings</a>
+        </div>
+      </div>
 
-  // Nav handling
-  el('#nav').addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-route]');
-    if(!btn) return;
-    location.hash = btn.dataset.route;
+      <a class="nav-link" data-page="forum.html" href="forum.html">Forum</a>
+      <a class="nav-link" data-page="live.html" href="live.html">Live</a>
+      <a class="nav-link" data-page="discover.html" href="discover.html">Discover</a>
+      <a class="nav-link" data-page="qa.html" href="qa.html">Q&amp;A</a>
+    </nav>
+
+    <!-- RIGHT: controls (CR-style: icons/links) -->
+    <nav class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Search" title="Search">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+          <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 10-.71.71l.27.28v.79l5 5 1.5-1.5-5-5zm-6 0A4.5 4.5 0 1114 9.5 4.5 4.5 0 019.5 14z"/>
+        </svg>
+      </button>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a class="nav-link" data-page="saved.html" href="saved.html">Saved</a>
+      <a class="nav-link" data-page="login.html" id="loginLink" href="login.html">Log In</a>
+    </nav>
+
+    <!-- Search popover -->
+    <div class="search-popover" id="searchBox">
+      <input type="search" placeholder="Search works…" aria-label="Search works">
+    </div>
+  </div>`;
+}
+
+
+
+function injectHeader(){
+  const hdr = document.querySelector('.site-header');
+  if(!hdr) return;
+  hdr.innerHTML = buildHeader();
+
+  // Mark active link by file name
+  const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  document.querySelectorAll('.site-header a.nav-link[data-page]').forEach(a=>{
+    if(a.dataset.page.toLowerCase() === file){ a.classList.add('active'); }
   });
 
-  function setActive(route){
-    document.querySelectorAll('#nav .pill').forEach(p => p.classList.remove('active'));
-    const btn = document.querySelector(`#nav [data-route="${route}"]`);
-    if(btn) btn.classList.add('active');
-  }
-
-  // Views
-  function viewHome(){
-    setActive('#/home');
-    app.innerHTML = `
-      <section class="hero grid card panel">
-        <div>
-          <h1>Anime & Manga, by the community, for the community</h1>
-          <p class="lead">
-            <strong>Welcome to the Future of Anime & Manga.</strong> Read. Create. Earn. <em>Without the paywalls.</em><br/>
-            Dive into a world where anime and manga thrive — free from subscriptions, tokens, and money grabs.
-            Whether you’re a fan looking to discover your next obsession or a creator ready to build your own studio, this is your home.
-            <br/><br/>
-            <strong>For Fans:</strong> Browse, shop, and support your favorite stories directly. No hidden fees, no hoops — just pure content.
-            <br/>
-            <strong>For Creators:</strong> Launch your studio, gather a team, release your works, and set your own subscriptions if you choose.
-            You keep <strong>99%</strong> — we only take <strong>1%</strong> to keep the lights on.
-            <br/><br/>
-            No middlemen. No nonsense. Just anime, manga, and the community that loves them.
-          </p>
-          <div class="actions">
-            <button class="btn" data-route="#/publish">Start Publishing</button>
-            <button class="btn ghost" data-route="#/explore">Explore Works</button>
-          </div>
-          <div class="badges"><span class="tag">Age protection</span><span class="tag">Creator-first</span><span class="tag">1% fee</span></div>
-        </div>
-        <div class="card panel">
-          <h3 style="margin:0 0 10px">Featured</h3>
-          <div class="carousel" id="featured">
-  <div class="carousel-viewport"></div>
-  <div class="nav">
-    <button class="icon-btn" data-dir="-1">←</button>
-    <button class="icon-btn" data-dir="1">→</button>
-    <button class="pill" data-route="#/explore">See all →</button>
-  </div>
-</div>
-          </div>
-        </div>
-      </section>
-
-      
-<section class="card panel" style="margin-top:20px">
-  <h3 style="margin:0 0 12px">Continue Reading / Watching</h3>
-  <div class="hlist-container">
-    <div class="hlist" id="continueList">
-      ${window.DB.catalog.map(tile).join('')}
-    </div>
-    <div class="hlist-nav left"><button id="scrollLeft">←</button></div>
-    <div class="hlist-nav right"><button id="scrollRight">→</button></div>
-  </div>
-</section>
-
-
-      <section class="card panel" style="margin-top:20px">
-        <h3 style="margin:0 0 12px">Browse by Tag</h3>
-        <div class="scroller" id="tags">${collectTags().map(t => `<span class='tag'>#${t}</span>`).join('')}</div>
-      </section>
-    `;
-
-    // wire buttons
-    app.querySelectorAll('[data-route]').forEach(b=>b.addEventListener('click',e=>{
-      location.hash = b.dataset.route;
-    }));
-
-    // build featured
-    const vp = el('#featured .carousel-viewport', app);
-    const slides = window.DB.featured.map(w => `
-      <div class="slide">
-        <div class="cover">
-          <img alt="cover" src="${coverFor(w)}" onerror="this.src='${ASSETS.placeholderManga}'"/>
-          <div class="meta">
-            <div class="title">${w.title}</div>
-            <div class="by">by ${w.creator}</div>
-            <div class="badges">${w.tags.map(t=>`<span class='tag'>#${t}</span>`).join('')}</div>
-          </div>
-        </div>
-      </div>`);
-    vp.innerHTML = slides.join('');
-
-// wire Continue scroller arrows
-    const cont = el('#continue .viewport', app);
-    const contNav = el('#continue .nav', app);
-    if (cont && contNav){
-      contNav.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-dir]'); if(!btn) return;
-        const dir = parseInt(btn.dataset.dir,10);
-        cont.scrollBy({ left: dir * 260, behavior: 'smooth' });
-      });
-    }
-    let idx = 0, N = slides.length, timer;
-    const update = ()=>{ vp.style.transform = `translateX(-${idx*100}%)`; };
-    const start = ()=>{ stop(); timer = setInterval(()=>{ idx=(idx+1)%N; update(); }, 4500); };
-    const stop = ()=>{ if(timer) clearInterval(timer); };
-    el('#featured [data-dir="-1"]', app).onclick = ()=>{ idx=(idx-1+N)%N; update(); start(); };
-    el('#featured [data-dir="1"]', app).onclick = ()=>{ idx=(idx+1)%N; update(); start(); };
-    start();
-  }
-
-  function tile(w){
-    return `
-    <article class="tile">
-      <img src="${coverFor(w)}" onerror="this.src='${w.kind==='animation'? ASSETS.placeholderVideo : ASSETS.placeholderManga}'" alt="cover"/>
-      <div class="tile-body">
-        <h4>${w.title}</h4>
-        <div class="by" style="color:#9bb0d0">by ${w.creator}</div>
-        <div class="badges">${w.tags.slice(0,3).map(t=>`<span class='tag'>#${t}</span>`).join('')}</div>
-      </div>
-    </article>`;
-  }
-
-  function viewExplore(){
-    setActive('#/explore');
-    const typeTabs = ['All','Manga','Animation'];
-    app.innerHTML = `
-      <section class="card panel">
-        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px">
-          <h2 style="margin:0">Explore</h2>
-          <div class="tabs" id="filterTabs" style="padding:0">
-            ${typeTabs.map((t,i)=>`<button class="pill ${i===0?'active':''}" data-kind="${t.toLowerCase()}">${t}</button>`).join('')}
-          </div>
-        </div>
-        <div class="grid cols-3" id="expGrid" style="margin-top:14px"></div>
-      </section>
-    `;
-    const grid = el('#expGrid', app);
-    const render = (kind) =>{
-      let list = window.DB.catalog;
-      if(kind==='manga') list = list.filter(w=>w.kind==='manga');
-      if(kind==='animation') list = list.filter(w=>w.kind==='animation');
-      grid.innerHTML = list.map(tile).join('');
-    };
-    app.querySelectorAll('#filterTabs .pill').forEach(b=>b.onclick=()=>{
-      app.querySelectorAll('#filterTabs .pill').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active'); render(b.dataset.kind);
+  // Simple search popover toggle
+  const btn = document.getElementById('searchBtn');
+  const box = document.getElementById('searchBox');
+  if(btn && box){
+    btn.addEventListener('click', ()=>{
+      box.classList.toggle('open');
+      if(box.classList.contains('open')) box.querySelector('input')?.focus();
     });
-    render('all');
+    document.addEventListener('click', (e)=>{
+      if(!box.contains(e.target) && !btn.contains(e.target)) box.classList.remove('open');
+    });
   }
+}
 
-  function stub(title){
-    return `<section class="card panel"><h2 style="margin:0 0 6px">${title}</h2><p class="lead">Coming soon — layout is ready to flesh out.</p></section>`;
+
+/* =========================
+   FEATURED: 2 CARDS AT A TIME
+   ========================= */
+let idx = 0;
+const featured = [
+  {t:'Railgun Waltz', by:'Mako Reactor', tags:['#action','#fantasy','#steampunk'], img:'assets/no-video.png'},
+  {t:'Azure Lullaby', by:'Mako Reactor', tags:['#drama','#music','#fantasy'], img:'assets/no-manga.png'},
+  {t:'Spark Runner', by:'OniWorks', tags:['#sci-fi','#action','#neon'], img:'assets/no-video.png'},
+  {t:'Blade of Dawn', by:'OniWorks', tags:['#shounen','#adventure','#fantasy'], img:'assets/no-manga.png'}
+];
+
+function cardHtml(f){
+  return `
+    <div class="feat-card">
+      <img src="${f.img}" alt="cover"/>
+      <div class="meta">
+        <div class="t">${f.t}</div>
+        <div class="by">by ${f.by}</div>
+        <div class="tags">${f.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="actions-row"><button class="pill sm save-btn">Save</button></div>
+      </div>
+    </div>`;
+}
+
+function renderFeatured(i){
+  const stage = document.querySelector('.feat-stage');
+  if(!stage) return;
+  const a = featured[i % featured.length];
+  const b = featured[(i+1) % featured.length];
+  stage.innerHTML = cardHtml(a) + cardHtml(b);
+
+  // wire save buttons
+  stage.querySelectorAll('.feat-card').forEach(card=>{
+    const t = card.querySelector('.t')?.textContent?.trim() || 'Featured';
+    const by = card.querySelector('.by')?.textContent?.replace(/^by\\s*/i,'').trim() || 'Unknown';
+    const img = card.querySelector('img')?.getAttribute('src') || 'assets/no-manga.png';
+    const btn = card.querySelector('.save-btn');
+    btn.addEventListener('click', ()=>{
+      addSaved({t, by, img});
+      btn.textContent = 'Saved ✓';
+      setTimeout(()=>btn.textContent='Save', 1200);
+    });
+  });
+}
+
+/* arrows */
+function wireFeaturedArrows(){
+  const prev = document.getElementById('featPrev');
+  const next = document.getElementById('featNext');
+  prev?.addEventListener('click', ()=>{ idx = (idx - 2 + featured.length) % featured.length; renderFeatured(idx); });
+  next?.addEventListener('click', ()=>{ idx = (idx + 2) % featured.length; renderFeatured(idx); });
+}
+
+/* =========================
+   CONTINUE READING scrollers
+   ========================= */
+document.querySelectorAll('.scrollLeft').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    btn.closest('.panel').querySelector('.hscroll').scrollBy({left:-320, behavior:'smooth'});
+  });
+});
+document.querySelectorAll('.scrollRight').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    btn.closest('.panel').querySelector('.hscroll').scrollBy({left:320, behavior:'smooth'});
+  });
+});
+
+/* =========================
+   SAVED LISTS (localStorage)
+   ========================= */
+function getSaved(){ try { return JSON.parse(localStorage.getItem('dj_saved')||'[]'); } catch(e){ return []; } }
+function setSaved(list){ localStorage.setItem('dj_saved', JSON.stringify(list)); }
+function addSaved(item){
+  const list = getSaved();
+  if(!list.some(x=>x.t===item.t && x.by===item.by)){ list.push(item); setSaved(list); }
+}
+function removeSaved(title){
+  const list = getSaved().filter(x=>x.t!==title); setSaved(list); renderSaved();
+}
+function injectSaveButtons(){
+  document.querySelectorAll('.card').forEach(card=>{
+    if(card.querySelector('.save-btn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'pill sm save-btn';
+    btn.textContent = 'Save';
+    const t = card.querySelector('h4')?.textContent?.trim() || 'Untitled';
+    const by = card.querySelector('.byline')?.textContent?.replace(/^by\\s*/i,'').trim() || 'Unknown';
+    const img = card.querySelector('img')?.getAttribute('src') || 'assets/no-manga.png';
+    btn.addEventListener('click', ()=>{ addSaved({t, by, img}); btn.textContent='Saved ✓'; setTimeout(()=>btn.textContent='Save', 1200);});
+    const actions = document.createElement('div');
+    actions.className = 'actions-row';
+    actions.appendChild(btn);
+    card.appendChild(actions);
+  });
+}
+function renderSaved(){
+  const mount = document.getElementById('savedList');
+  if(!mount) return;
+  const list = getSaved();
+  mount.innerHTML = list.length ? '' : '<p class="kicker">Nothing saved yet. Find something you like and hit “Save”.</p>';
+  list.forEach(item=>{
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `
+      <img src="${item.img}">
+      <h4>${item.t}</h4>
+      <div class="byline">by ${item.by}</div>
+      <div class="actions-row">
+        <button class="pill sm remove-btn" data-title="${item.t}">Remove</button>
+      </div>`;
+    mount.appendChild(el);
+  });
+  mount.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.remove-btn');
+    if(btn){ removeSaved(btn.dataset.title); }
+  }, { once: true });
+}
+
+/* =========================
+   LOGIN DEMO (localStorage)
+   ========================= */
+function updateLoginLink(){
+  const link = document.getElementById('loginLink');
+  if(!link) return;
+  const auth = JSON.parse(localStorage.getItem('dj_auth')||'null');
+  if(auth){
+    link.textContent = 'Log Out';
+    link.href = '#logout';
+    link.addEventListener('click', (e)=>{
+      e.preventDefault(); localStorage.removeItem('dj_auth'); location.reload();
+    }, { once: true });
   }
+}
+function wireLoginForm(){
+  const form = document.getElementById('loginForm');
+  if(!form) return;
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const remember = document.getElementById('remember').checked;
+    if(email){
+      localStorage.setItem('dj_auth', JSON.stringify({email, remember, ts:Date.now()}));
+      window.location.href = 'index.html';
+    }
+  });
+}
 
-  const routes = {
-    '#/home': viewHome,
-    '#/explore': viewExplore,
-    '#/leaderboard': () => { setActive('#/leaderboard'); app.innerHTML = stub('Leaderboard'); },
-    '#/shop': () => { setActive('#/shop'); app.innerHTML = stub('Shop'); },
-    '#/studio': () => { setActive('#/studio'); app.innerHTML = stub('Studio'); },
-    '#/forum': () => { setActive('#/forum'); app.innerHTML = stub('Forum'); },
-    '#/live': () => { setActive('#/live'); app.innerHTML = stub('Live'); },
-    '#/discover': () => { setActive('#/discover'); app.innerHTML = stub('Discover'); },
-    '#/qa': () => { setActive('#/qa'); app.innerHTML = stub('Q & A'); },
-    '#/publish': () => { setActive('#/publish'); app.innerHTML = stub('Publish'); },
-  };
-
-  function coverFor(w){
-    if(w.cover) return w.cover;
-    return w.kind === 'animation' ? ASSETS.placeholderVideo : ASSETS.placeholderManga;
-  }
-
-  function collectTags(){
-    const s = new Set();
-    window.DB.catalog.forEach(w=>w.tags.forEach(t=>s.add(t)));
-    return [...s].sort();
-  }
-
-  function router(){
-    const h = location.hash || '#/home';
-    (routes[h] || routes['#/home'])();
-  }
-  window.addEventListener('hashchange', router);
-  router();
-})();
+/* =========================
+   INIT
+   ========================= */
+document.addEventListener('DOMContentLoaded', ()=>{
+  injectHeader();            // one header to rule them all
+  updateLoginLink();         // adjust login/logout link
+  renderFeatured(idx);       // draw 2 featured
+  wireFeaturedArrows();      // prev/next 2-at-a-time
+  injectSaveButtons();       // add Save to general cards
+  renderSaved();             // populate Saved page (if present)
+  wireLoginForm();           // login form (if present)
+});
